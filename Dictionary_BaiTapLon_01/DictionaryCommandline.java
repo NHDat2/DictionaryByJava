@@ -18,6 +18,7 @@ public class DictionaryCommandline
 			String wordExplain = showInfo_Dictionary.list_word.get(i).getWordExplain().toString();
 			System.out.println(i + 1 + "\t" + wordTarget + "\t" + wordExplain);
 		}
+		System.out.println("-------------------------------------------------------------------------");
 	}
 	/**
 	* dictionaryBasic includes basic actions to do with a dictionary
@@ -28,7 +29,15 @@ public class DictionaryCommandline
 	public void dictionaryBasic(DictionaryManagement insert_Dictionary, Dictionary input_Dictionary)
 	{
 		insert_Dictionary.insertFromCommandLine(input_Dictionary);
+		//insert_Dictionary.insertFromFile(input_Dictionary);
 		showAllWord(input_Dictionary);
+	}
+
+	public void dictionaryAdvanced(DictionaryManagement inputTxt_Dictionary, Dictionary input_Dictionary)
+	{
+		inputTxt_Dictionary.insertFromFile(input_Dictionary);
+		showAllWord(input_Dictionary);
+		inputTxt_Dictionary.dictionaryLookup(input_Dictionary);
 	}
 	/**
 	* main function to take main ativities
@@ -41,5 +50,6 @@ public class DictionaryCommandline
 		DictionaryManagement global_Dic_Management = new DictionaryManagement();
 		DictionaryCommandline global_Dic_Commandline = new DictionaryCommandline();
 		global_Dic_Commandline.dictionaryBasic(global_Dic_Management, global_Dictionary);
+		global_Dic_Commandline.dictionaryAdvanced(global_Dic_Management, global_Dictionary);
 	}
 }
