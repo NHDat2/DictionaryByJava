@@ -61,9 +61,9 @@ class DictionaryManagement
 
 	public void addWords(Dictionary add_Dictionary){
 		Scanner scan = new Scanner(System.in);
-		Word added_Word;
-		String added_WordTarget;
-		String added_WordExplain;
+		Word added_Word = new Word();
+		String added_WordTarget = "";
+		String added_WordExplain = "";
 		System.out.println("Enter your target word: ");
 		added_WordTarget = scan.nextLine();
 		System.out.println("Enter your explain word: ");
@@ -75,13 +75,13 @@ class DictionaryManagement
 
 	public void editWord(Dictionary edit_Dictionary){
 		Scanner scan = new Scanner(System.in);
-		Word replace_Word;
-		String edit_WordTarget;
-		String replace_WordTarget;
-		String replace_WordExplain;
+		Word replace_Word = new Word();
+		String edit_WordTarget = "";
+		String replace_WordTarget = "";
+		String replace_WordExplain = "";
 		System.out.println("Enter your word which needs editing: ");
 		edit_WordTarget = scan.nextLine();
-		System.out.prinln("Enter your edited target word: ");
+		System.out.println("Enter your edited target word: ");
 		replace_WordTarget = scan.nextLine();
 		System.out.println("Enter your edited explain word: ");
 		replace_WordExplain = scan.nextLine();
@@ -102,11 +102,11 @@ class DictionaryManagement
 		String deleted_Word;
 		System.out.println("Enter your word which needs deleting (target word only): ");
 		deleted_Word = scan.nextLine();
-		for (Word value : delete_Dictionary.list_word)
+		for (int i = 0; i < delete_Dictionary.list_word.size(); i++)
 		{
-			if (delete_Word.equals(value.getWordTarget()))
-			{
-				delete_Dictionary.list_word.remove(value);
+			String delete_Target = delete_Dictionary.list_word.get(i).getWordTarget().toString();
+			if (delete_Target.equals(deleted_Word)){
+				delete_Dictionary.list_word.remove(i);
 			}
 		}
 	}
@@ -116,7 +116,7 @@ class DictionaryManagement
 	public void updateFile(Dictionary output_Dictionary){
 		try{
 			FileWriter writer = new FileWriter("Dictionaries.txt");
-    	BufferedWriter buffer = new BufferedWriter(writer);
+    		BufferedWriter buffer = new BufferedWriter(writer);
 			for (int i = 0; i < output_Dictionary.list_word.size(); i++)
 			{
 				String out_Target = output_Dictionary.list_word.get(i).getWordTarget().toString();
@@ -124,6 +124,7 @@ class DictionaryManagement
 				buffer.write(out_Target);
 				buffer.write("\t");
 				buffer.write(out_Explain);
+				buffer.write("\n");
 			}
 			buffer.close();
 			System.out.println("Changes saved...");
@@ -131,13 +132,15 @@ class DictionaryManagement
 		catch(IOException e) {
 		  e.printStackTrace();
 		}
-}
+	}
 
 	public void dictionaryLookup(Dictionary find_Dictionary)
 	{
 		Scanner scan = new Scanner(System.in);
-		String key_word = scan.nextLine();
-		scan.close();
+		String key_word;
+		System.out.println("Enter your word: ");
+		key_word = scan.nextLine();
+		//scan.close();
 		for (Word value : find_Dictionary.list_word)
 		{
 			if (key_word.equals(value.getWordTarget()))

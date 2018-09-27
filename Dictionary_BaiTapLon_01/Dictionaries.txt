@@ -1,2 +1,8 @@
-Hello	xin chao
 house	ngoi nha
+table	cai ban
+school	ngoi truong
+girl	co gai
+boy	cau be
+cat	con meo
+cinema	rap phim
+football	bong da

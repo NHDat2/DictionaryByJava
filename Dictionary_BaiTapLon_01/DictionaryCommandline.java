@@ -1,4 +1,12 @@
 package DictionaryProgram;
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
 * DictionaryCommanline manages actions through commanline
 */
@@ -41,38 +49,49 @@ public class DictionaryCommandline
 	}
 
 	public void showMenu(DictionaryManagement manage_Dictionary, Dictionary main_Dictionary){
-		Scanner scan = new Scanner(System.in);
-		int chooseNumber = 0;
-		while (chooseNumber != 6)
-		{
+	Scanner scan = new Scanner(System.in);
+	while (true)
+		{			
 			System.out.println("Choose your option: ");
-			System.out.println("1. take input from commandline");
-			System.out.println("2. take input from text file");
+			System.out.println("1. get input from commandline");
+			System.out.println("2. get input from text file");
 			System.out.println("3. add word");
 			System.out.println("4. edit word");
 			System.out.println("5. delete word");
-			System.out.println("6. exit");
-			int chooseNumber = scan.nextInt();
+			System.out.println("6. lookup");
+			System.out.println("7. show all words");
+			System.out.println("8. exit");
+			String chooseNumber = scan.nextLine();
 			switch (chooseNumber) {
-				case 1 :
+				case "1" :
 					manage_Dictionary.insertFromCommandLine(main_Dictionary);
 					break;
-				case 2 :
+				case "2" :
 					manage_Dictionary.insertFromFile(main_Dictionary);
 					break;
-				case 3 :
+				case "3" :
 					manage_Dictionary.addWords(main_Dictionary);
+					manage_Dictionary.updateFile(main_Dictionary);
 					break;
-				case 4 :
+				case "4" :
 					manage_Dictionary.editWord(main_Dictionary);
+					manage_Dictionary.updateFile(main_Dictionary);
 					break;
-				case 5 :
+				case "5" :
 					manage_Dictionary.deleteWord(main_Dictionary);
+					manage_Dictionary.updateFile(main_Dictionary);
+					break;
+				case "6" :
+					manage_Dictionary.dictionaryLookup(main_Dictionary);
+					break;
+				case "7" :
+					showAllWord(main_Dictionary);
 					break;
 				default:
 					System.out.println("Closing...");
 					break;
 			}
+			if (chooseNumber == "8") break;
 		}
 	}
 	/**
@@ -86,6 +105,7 @@ public class DictionaryCommandline
 		DictionaryManagement global_Dic_Management = new DictionaryManagement();
 		DictionaryCommandline global_Dic_Commandline = new DictionaryCommandline();
 		//global_Dic_Commandline.dictionaryBasic(global_Dic_Management, global_Dictionary);
-		global_Dic_Commandline.dictionaryAdvanced(global_Dic_Management, global_Dictionary);
+		//global_Dic_Commandline.dictionaryAdvanced(global_Dic_Management, global_Dictionary);
+		global_Dic_Commandline.showMenu(global_Dic_Management, global_Dictionary);
 	}
 }
