@@ -49,8 +49,9 @@ public class DictionaryCommandline
 	}
 
 	public void showMenu(DictionaryManagement manage_Dictionary, Dictionary main_Dictionary){
-	Scanner scan = new Scanner(System.in);
-	while (true)
+		Scanner scan = new Scanner(System.in);
+		int chooseNumber = 0;
+		while (chooseNumber < 8)
 		{			
 			System.out.println("Choose your option: ");
 			System.out.println("1. get input from commandline");
@@ -61,37 +62,36 @@ public class DictionaryCommandline
 			System.out.println("6. lookup");
 			System.out.println("7. show all words");
 			System.out.println("8. exit");
-			String chooseNumber = scan.nextLine();
+			chooseNumber = scan.nextInt();
 			switch (chooseNumber) {
-				case "1" :
+				case 1 :
 					manage_Dictionary.insertFromCommandLine(main_Dictionary);
 					break;
-				case "2" :
+				case 2 :
 					manage_Dictionary.insertFromFile(main_Dictionary);
 					break;
-				case "3" :
+				case 3 :
 					manage_Dictionary.addWords(main_Dictionary);
 					manage_Dictionary.updateFile(main_Dictionary);
 					break;
-				case "4" :
+				case 4 :
 					manage_Dictionary.editWord(main_Dictionary);
 					manage_Dictionary.updateFile(main_Dictionary);
 					break;
-				case "5" :
+				case 5 :
 					manage_Dictionary.deleteWord(main_Dictionary);
 					manage_Dictionary.updateFile(main_Dictionary);
 					break;
-				case "6" :
+				case 6 :
 					manage_Dictionary.dictionaryLookup(main_Dictionary);
 					break;
-				case "7" :
+				case 7 :
 					showAllWord(main_Dictionary);
 					break;
 				default:
-					System.out.println("Closing...");
+					System.out.println("End or unknown command, closing...");
 					break;
 			}
-			if (chooseNumber == "8") break;
 		}
 	}
 	/**

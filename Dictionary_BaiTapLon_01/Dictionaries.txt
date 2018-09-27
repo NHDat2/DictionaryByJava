@@ -6,3 +6,4 @@ boy	cau be
 cat	con meo
 cinema	rap phim
 football	bong da
+dog	con cho
