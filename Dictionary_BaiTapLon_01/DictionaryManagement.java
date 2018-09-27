@@ -4,12 +4,16 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
 * DictionaryManagement includes dictionary's manage methods
 */
 class DictionaryManagement
 {
-	/** 
+	/**
 	* insestFromCommandline to get input from commandline
 	*@param input_Dictionary is the dictionary to add input to
 	*@return don't return anything
@@ -34,7 +38,7 @@ class DictionaryManagement
 	{
 		try
 		{
-			File path = new File("D:/Java/TH OOP/Dictionary_BaiTapLon_01/Dictionaries.txt");
+			File path = new File("Dictionaries.txt");
 			FileReader readFile = new FileReader(path);
 			BufferedReader bufferReader = new BufferedReader(readFile);
 			String line;
@@ -54,6 +58,80 @@ class DictionaryManagement
 			System.out.println("Error read file : " + er);
 		}
 	}
+
+	public void addWords(Dictionary add_Dictionary){
+		Scanner scan = new Scanner(System.in);
+		Word added_Word;
+		String added_WordTarget;
+		String added_WordExplain;
+		System.out.println("Enter your target word: ");
+		added_WordTarget = scan.nextLine();
+		System.out.println("Enter your explain word: ");
+		added_WordExplain = scan.nextLine();
+		added_Word.setWordTarget(added_WordTarget);
+		added_Word.setWordExplain(added_WordExplain);
+		add_Dictionary.addElement(added_Word);
+	}
+
+	public void editWord(Dictionary edit_Dictionary){
+		Scanner scan = new Scanner(System.in);
+		Word replace_Word;
+		String edit_WordTarget;
+		String replace_WordTarget;
+		String replace_WordExplain;
+		System.out.println("Enter your word which needs editing: ");
+		edit_WordTarget = scan.nextLine();
+		System.out.prinln("Enter your edited target word: ");
+		replace_WordTarget = scan.nextLine();
+		System.out.println("Enter your edited explain word: ");
+		replace_WordExplain = scan.nextLine();
+		replace_Word.setWordTarget(replace_WordTarget);
+		replace_Word.setWordExplain(replace_WordExplain);
+		for (Word value : edit_Dictionary.list_word)
+		{
+			if (edit_WordTarget.equals(value.getWordTarget()))
+			{
+				value.setWordTarget(replace_Word.getWordTarget());
+				value.setWordExplain(replace_Word.getWordExplain());
+			}
+		}
+	}
+
+	public void deleteWord(Dictionary delete_Dictionary){
+		Scanner scan = new Scanner(System.in);
+		String deleted_Word;
+		System.out.println("Enter your word which needs deleting (target word only): ");
+		deleted_Word = scan.nextLine();
+		for (Word value : delete_Dictionary.list_word)
+		{
+			if (delete_Word.equals(value.getWordTarget()))
+			{
+				delete_Dictionary.list_word.remove(value);
+			}
+		}
+	}
+	/**
+	* updateFile to update fixed data
+	*/
+	public void updateFile(Dictionary output_Dictionary){
+		try{
+			FileWriter writer = new FileWriter("Dictionaries.txt");
+    	BufferedWriter buffer = new BufferedWriter(writer);
+			for (int i = 0; i < output_Dictionary.list_word.size(); i++)
+			{
+				String out_Target = output_Dictionary.list_word.get(i).getWordTarget().toString();
+				String out_Explain = output_Dictionary.list_word.get(i).getWordExplain().toString();
+				buffer.write(out_Target);
+				buffer.write("\t");
+				buffer.write(out_Explain);
+			}
+			buffer.close();
+			System.out.println("Changes saved...");
+		}
+		catch(IOException e) {
+		  e.printStackTrace();
+		}
+}
 
 	public void dictionaryLookup(Dictionary find_Dictionary)
 	{

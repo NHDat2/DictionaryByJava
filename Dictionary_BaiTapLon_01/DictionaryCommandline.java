@@ -14,7 +14,7 @@ public class DictionaryCommandline
 		System.out.println("No\t" + "English\t" + "Vietnamese");
 		for (int i = 0; i < showInfo_Dictionary.list_word.size(); i++)
 		{
-			String wordTarget = showInfo_Dictionary.list_word.get(i).getWordTarget().toString(); 
+			String wordTarget = showInfo_Dictionary.list_word.get(i).getWordTarget().toString();
 			String wordExplain = showInfo_Dictionary.list_word.get(i).getWordExplain().toString();
 			System.out.println(i + 1 + "\t" + wordTarget + "\t" + wordExplain);
 		}
@@ -39,17 +39,53 @@ public class DictionaryCommandline
 		showAllWord(input_Dictionary);
 		inputTxt_Dictionary.dictionaryLookup(input_Dictionary);
 	}
+
+	public void showMenu(DictionaryManagement manage_Dictionary, Dictionary main_Dictionary){
+		Scanner scan = new Scanner(System.in);
+		int chooseNumber = 0;
+		while (chooseNumber != 6)
+		{
+			System.out.println("Choose your option: ");
+			System.out.println("1. take input from commandline");
+			System.out.println("2. take input from text file");
+			System.out.println("3. add word");
+			System.out.println("4. edit word");
+			System.out.println("5. delete word");
+			System.out.println("6. exit");
+			int chooseNumber = scan.nextInt();
+			switch (chooseNumber) {
+				case 1 :
+					manage_Dictionary.insertFromCommandLine(main_Dictionary);
+					break;
+				case 2 :
+					manage_Dictionary.insertFromFile(main_Dictionary);
+					break;
+				case 3 :
+					manage_Dictionary.addWords(main_Dictionary);
+					break;
+				case 4 :
+					manage_Dictionary.editWord(main_Dictionary);
+					break;
+				case 5 :
+					manage_Dictionary.deleteWord(main_Dictionary);
+					break;
+				default:
+					System.out.println("Closing...");
+					break;
+			}
+		}
+	}
 	/**
 	* main function to take main ativities
-	* @param args 
+	* @param args
 	* @return don't return anything
 	*/
 	public static void main(String[] args)
 	{
-		Dictionary global_Dictionary = new Dictionary();	
+		Dictionary global_Dictionary = new Dictionary();
 		DictionaryManagement global_Dic_Management = new DictionaryManagement();
 		DictionaryCommandline global_Dic_Commandline = new DictionaryCommandline();
-		global_Dic_Commandline.dictionaryBasic(global_Dic_Management, global_Dictionary);
+		//global_Dic_Commandline.dictionaryBasic(global_Dic_Management, global_Dictionary);
 		global_Dic_Commandline.dictionaryAdvanced(global_Dic_Management, global_Dictionary);
 	}
 }
