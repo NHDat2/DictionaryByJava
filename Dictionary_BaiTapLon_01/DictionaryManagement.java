@@ -113,7 +113,7 @@ class DictionaryManagement
 	/**
 	* updateFile to update fixed data
 	*/
-	public void updateFile(Dictionary output_Dictionary){
+	public void dictionaryExportToFile(Dictionary output_Dictionary){
 		try{
 			FileWriter writer = new FileWriter("Dictionaries.txt");
     		BufferedWriter buffer = new BufferedWriter(writer);

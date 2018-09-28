@@ -48,10 +48,29 @@ public class DictionaryCommandline
 		inputTxt_Dictionary.dictionaryLookup(input_Dictionary);
 	}
 
+	public void dictionarySearcher(Dictionary search_Dictionary){
+		String input_Word;
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter your word: ");
+		input_Word = scan.nextLine();
+		for (int i = 0; i < search_Dictionary.list_word.size(); i++){
+			String compare_Target = search_Dictionary.list_word.get(i).getWordTarget().toString();
+			String compare_Explain = search_Dictionary.list_word.get(i).getWordExplain().toString();
+			int isFound = compare_Target.indexOf(input_Word);
+			if (isFound != -1){
+				System.out.print(compare_Target);
+				System.out.print("\t");
+				System.out.print(compare_Explain);
+				System.out.print("\n");
+			}
+		}
+
+	}
+
 	public void showMenu(DictionaryManagement manage_Dictionary, Dictionary main_Dictionary){
 		Scanner scan = new Scanner(System.in);
 		int chooseNumber = 0;
-		while (chooseNumber < 8)
+		while (chooseNumber < 9)
 		{			
 			System.out.println("Choose your option: ");
 			System.out.println("1. get input from commandline");
@@ -61,7 +80,8 @@ public class DictionaryCommandline
 			System.out.println("5. delete word");
 			System.out.println("6. lookup");
 			System.out.println("7. show all words");
-			System.out.println("8. exit");
+			System.out.println("8. search for words");
+			System.out.println("9. exit");
 			chooseNumber = scan.nextInt();
 			switch (chooseNumber) {
 				case 1 :
@@ -72,21 +92,24 @@ public class DictionaryCommandline
 					break;
 				case 3 :
 					manage_Dictionary.addWords(main_Dictionary);
-					manage_Dictionary.updateFile(main_Dictionary);
+					manage_Dictionary.dictionaryExportToFile(main_Dictionary);
 					break;
 				case 4 :
 					manage_Dictionary.editWord(main_Dictionary);
-					manage_Dictionary.updateFile(main_Dictionary);
+					manage_Dictionary.dictionaryExportToFile(main_Dictionary);
 					break;
 				case 5 :
 					manage_Dictionary.deleteWord(main_Dictionary);
-					manage_Dictionary.updateFile(main_Dictionary);
+					manage_Dictionary.dictionaryExportToFile(main_Dictionary);
 					break;
 				case 6 :
 					manage_Dictionary.dictionaryLookup(main_Dictionary);
 					break;
 				case 7 :
 					showAllWord(main_Dictionary);
+					break;
+				case 8 :
+					dictionarySearcher(main_Dictionary);
 					break;
 				default:
 					System.out.println("End or unknown command, closing...");
