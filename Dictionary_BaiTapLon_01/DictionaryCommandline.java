@@ -19,12 +19,29 @@ public class DictionaryCommandline
 	*/
 	public void showAllWord(Dictionary showInfo_Dictionary)
 	{
-		System.out.println("No\t" + "English\t" + "Vietnamese");
+		//int max_size = -99;
+		/**for (int i = 0; i < showInfo_Dictionary.list_word.size(); i++)
+		{
+			int lengOfwordTarget = showInfo_Dictionary.list_word.get(i).getWordTarget().length();
+			if (lengOfwordTarget > max_size)
+			{
+				max_size = lengOfwordTarget;
+			}
+		}
+		String tab = "            " + "\t\t" + "  ";
+		//for (int i = 0; i < max_size; i++) tab = tab + " ";
+		//tab += "   " + "\t" + "    ";*/
+		System.out.println("No" + "\t" + "English" + "           |            " + "Vietnamese");
+		System.out.println("-------------------------------------------------------------------------");
 		for (int i = 0; i < showInfo_Dictionary.list_word.size(); i++)
 		{
 			String wordTarget = showInfo_Dictionary.list_word.get(i).getWordTarget().toString();
 			String wordExplain = showInfo_Dictionary.list_word.get(i).getWordExplain().toString();
-			System.out.println(i + 1 + "\t" + wordTarget + "\t" + wordExplain);
+			int numOfSpace = 30;
+			numOfSpace = 30 - wordTarget.length();
+			String tabs = "";
+			for (int j = 0; j < numOfSpace; j++) tabs = tabs + " ";
+			System.out.println(i + 1 + "\t" + wordTarget + tabs + wordExplain);
 		}
 		System.out.println("-------------------------------------------------------------------------");
 	}
@@ -48,26 +65,35 @@ public class DictionaryCommandline
 		inputTxt_Dictionary.dictionaryLookup(input_Dictionary);
 	}
 
-	public void dictionarySearcher(Dictionary search_Dictionary){
+	public void dictionarySearcher(Dictionary search_Dictionary)
+	{
 		String input_Word;
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Enter your word: ");
 		input_Word = scan.nextLine();
-		for (int i = 0; i < search_Dictionary.list_word.size(); i++){
+		boolean existWord = false;
+		for (int i = 0; i < search_Dictionary.list_word.size(); i++)
+		{
 			String compare_Target = search_Dictionary.list_word.get(i).getWordTarget().toString();
 			String compare_Explain = search_Dictionary.list_word.get(i).getWordExplain().toString();
 			int isFound = compare_Target.indexOf(input_Word);
-			if (isFound != -1){
+			if (isFound != -1 && isFound == 0)
+			{
+				existWord = true;
 				System.out.print(compare_Target);
 				System.out.print("\t");
 				System.out.print(compare_Explain);
 				System.out.print("\n");
 			}
 		}
-
+		if (existWord == false)
+		{
+			System.out.println("Your asked word does not exist!");
+		}
 	}
 
-	public void showMenu(DictionaryManagement manage_Dictionary, Dictionary main_Dictionary){
+	public void showMenu(DictionaryManagement manage_Dictionary, Dictionary main_Dictionary)
+	{
 		Scanner scan = new Scanner(System.in);
 		int chooseNumber = 0;
 		while (chooseNumber < 9)
@@ -83,7 +109,8 @@ public class DictionaryCommandline
 			System.out.println("8. search for words");
 			System.out.println("9. exit");
 			chooseNumber = scan.nextInt();
-			switch (chooseNumber) {
+			switch (chooseNumber)
+			{
 				case 1 :
 					manage_Dictionary.insertFromCommandLine(main_Dictionary);
 					break;

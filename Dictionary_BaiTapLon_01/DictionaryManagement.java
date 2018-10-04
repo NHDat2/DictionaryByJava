@@ -64,9 +64,9 @@ class DictionaryManagement
 		Word added_Word = new Word();
 		String added_WordTarget = "";
 		String added_WordExplain = "";
-		System.out.println("Enter your target word: ");
+		System.out.print("Enter your target word: ");
 		added_WordTarget = scan.nextLine();
-		System.out.println("Enter your explain word: ");
+		System.out.print("Enter your explain word: ");
 		added_WordExplain = scan.nextLine();
 		added_Word.setWordTarget(added_WordTarget);
 		added_Word.setWordExplain(added_WordExplain);
@@ -79,11 +79,11 @@ class DictionaryManagement
 		String edit_WordTarget = "";
 		String replace_WordTarget = "";
 		String replace_WordExplain = "";
-		System.out.println("Enter your word which needs editing: ");
+		System.out.print("Enter your word which needs editing: ");
 		edit_WordTarget = scan.nextLine();
-		System.out.println("Enter your edited target word: ");
+		System.out.print("Enter your edited target word: ");
 		replace_WordTarget = scan.nextLine();
-		System.out.println("Enter your edited explain word: ");
+		System.out.print("Enter your edited explain word: ");
 		replace_WordExplain = scan.nextLine();
 		replace_Word.setWordTarget(replace_WordTarget);
 		replace_Word.setWordExplain(replace_WordExplain);
@@ -100,7 +100,7 @@ class DictionaryManagement
 	public void deleteWord(Dictionary delete_Dictionary){
 		Scanner scan = new Scanner(System.in);
 		String deleted_Word;
-		System.out.println("Enter your word which needs deleting (target word only): ");
+		System.out.print("Enter your word which needs deleting (target word only): ");
 		deleted_Word = scan.nextLine();
 		for (int i = 0; i < delete_Dictionary.list_word.size(); i++)
 		{

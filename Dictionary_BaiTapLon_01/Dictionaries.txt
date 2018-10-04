@@ -10,3 +10,6 @@ dog	con cho
 translate	dich
 transfer	chuyen nhuong
 transport	van chuyen
+hai	ngu si
+diesonenkiden	dsk
+nothinggggggggg	khong co gi
