@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 
 /**
 * DictionaryManagement includes dictionary's manage methods
@@ -71,6 +73,11 @@ class DictionaryManagement
 		added_Word.setWordTarget(added_WordTarget);
 		added_Word.setWordExplain(added_WordExplain);
 		add_Dictionary.addElement(added_Word);
+		System.out.println("Added");
+        try{
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (Exception er){};
 	}
 
 	public void editWord(Dictionary edit_Dictionary){
@@ -95,6 +102,11 @@ class DictionaryManagement
 				value.setWordExplain(replace_Word.getWordExplain());
 			}
 		}
+		System.out.println("Edited");
+        try{
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (Exception er){};
 	}
 
 	public void deleteWord(Dictionary delete_Dictionary){
@@ -109,6 +121,11 @@ class DictionaryManagement
 				delete_Dictionary.list_word.remove(i);
 			}
 		}
+		System.out.println("Deleted");
+        try{
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (Exception er){};
 	}
 	/**
 	* updateFile to update fixed data
@@ -128,6 +145,10 @@ class DictionaryManagement
 			}
 			buffer.close();
 			System.out.println("Changes saved...");
+			try{
+                TimeUnit.SECONDS.sleep(3);
+            }
+            catch (Exception er){};
 		}
 		catch(IOException e) {
 		  e.printStackTrace();

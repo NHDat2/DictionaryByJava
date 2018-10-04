@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 
 /**
 * DictionaryCommanline manages actions through commanline
@@ -44,6 +46,10 @@ public class DictionaryCommandline
 			System.out.println(i + 1 + "\t" + wordTarget + tabs + wordExplain);
 		}
 		System.out.println("-------------------------------------------------------------------------");
+		try{
+            TimeUnit.SECONDS.sleep(3);
+        }
+        catch (Exception er){};
 	}
 	/**
 	* dictionaryBasic includes basic actions to do with a dictionary
@@ -90,59 +96,76 @@ public class DictionaryCommandline
 		{
 			System.out.println("Your asked word does not exist!");
 		}
+		try{
+				TimeUnit.SECONDS.sleep(2);
+		}
+		catch (Exception er){};
 	}
 
-	public void showMenu(DictionaryManagement manage_Dictionary, Dictionary main_Dictionary)
+	public void showMenu(DictionaryManagement manage_Dictionary, Dictionary main_Dictionary, Translator main_translator)
 	{
 		Scanner scan = new Scanner(System.in);
 		int chooseNumber = 0;
-		while (chooseNumber < 9)
-		{			
-			System.out.println("Choose your option: ");
-			System.out.println("1. get input from commandline");
-			System.out.println("2. get input from text file");
-			System.out.println("3. add word");
-			System.out.println("4. edit word");
-			System.out.println("5. delete word");
-			System.out.println("6. lookup");
-			System.out.println("7. show all words");
-			System.out.println("8. search for words");
-			System.out.println("9. exit");
-			chooseNumber = scan.nextInt();
-			switch (chooseNumber)
-			{
-				case 1 :
-					manage_Dictionary.insertFromCommandLine(main_Dictionary);
-					break;
-				case 2 :
-					manage_Dictionary.insertFromFile(main_Dictionary);
-					break;
-				case 3 :
-					manage_Dictionary.addWords(main_Dictionary);
-					manage_Dictionary.dictionaryExportToFile(main_Dictionary);
-					break;
-				case 4 :
-					manage_Dictionary.editWord(main_Dictionary);
-					manage_Dictionary.dictionaryExportToFile(main_Dictionary);
-					break;
-				case 5 :
-					manage_Dictionary.deleteWord(main_Dictionary);
-					manage_Dictionary.dictionaryExportToFile(main_Dictionary);
-					break;
-				case 6 :
-					manage_Dictionary.dictionaryLookup(main_Dictionary);
-					break;
-				case 7 :
-					showAllWord(main_Dictionary);
-					break;
-				case 8 :
-					dictionarySearcher(main_Dictionary);
-					break;
-				default:
-					System.out.println("End or unknown command, closing...");
-					break;
-			}
-		}
+		while (chooseNumber < 11)
+      {
+          System.out.println("Choose your option: ");
+          System.out.println("1. get input from commandline");
+          System.out.println("2. get input from text file");
+          System.out.println("3. add word");
+          System.out.println("4. edit word");
+          System.out.println("5. delete word");
+          System.out.println("6. lookup");
+          System.out.println("7. show all words");
+          System.out.println("8. search for words");
+          System.out.println("9. save all changes");
+          System.out.println("10. search for words online");
+          System.out.println("11. exit");
+          chooseNumber = scan.nextInt();
+          switch (chooseNumber) {
+              case 1 :
+                  manage_Dictionary.insertFromCommandLine(main_Dictionary);
+                  break;
+              case 2 :
+                  manage_Dictionary.insertFromFile(main_Dictionary);
+                  break;
+              case 3 :
+                  manage_Dictionary.addWords(main_Dictionary);
+                  //manage_Dictionary.dictionaryExportToFile(main_Dictionary);
+                  break;
+              case 4 :
+                  manage_Dictionary.editWord(main_Dictionary);
+                  //manage_Dictionary.dictionaryExportToFile(main_Dictionary);
+                  break;
+              case 5 :
+                  manage_Dictionary.deleteWord(main_Dictionary);
+                  //manage_Dictionary.dictionaryExportToFile(main_Dictionary);
+                  break;
+              case 6 :
+                  manage_Dictionary.dictionaryLookup(main_Dictionary);
+                  break;
+              case 7 :
+                  showAllWord(main_Dictionary);
+                  break;
+              case 8 :
+                  dictionarySearcher(main_Dictionary);
+                  break;
+              case 9 :
+                  manage_Dictionary.dictionaryExportToFile(main_Dictionary);
+                  break;
+              case 10 :
+                  try{
+                      main_translator.get_translator();
+                  }
+                  catch (Exception er)
+                  {
+                      System.out.println("Error read file : " + er);
+                  }
+                  break;
+              default:
+                  System.out.println("End or unknown command, closing...");
+                  break;
+          }
+        }
 	}
 	/**
 	* main function to take main ativities
@@ -154,8 +177,9 @@ public class DictionaryCommandline
 		Dictionary global_Dictionary = new Dictionary();
 		DictionaryManagement global_Dic_Management = new DictionaryManagement();
 		DictionaryCommandline global_Dic_Commandline = new DictionaryCommandline();
+		Translator global_Translator = new Translator();
 		//global_Dic_Commandline.dictionaryBasic(global_Dic_Management, global_Dictionary);
 		//global_Dic_Commandline.dictionaryAdvanced(global_Dic_Management, global_Dictionary);
-		global_Dic_Commandline.showMenu(global_Dic_Management, global_Dictionary);
+		global_Dic_Commandline.showMenu(global_Dic_Management, global_Dictionary, global_Translator);
 	}
 }
