@@ -1,0 +1,13 @@
+house	ngoi nha
+table	cai ban
+school	ngoi truong
+girl	co gai
+boy	cau be
+cat	con meo
+cinema	rap phim
+football	bong da
+dog	con cho
+translate	dich
+transfer	chuyen nhuong
+transport	van chuyen
+hello	xin chao
