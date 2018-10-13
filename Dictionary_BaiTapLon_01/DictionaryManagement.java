@@ -1,5 +1,4 @@
 package DictionaryProgram;
-
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,9 +9,13 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * DictionaryManagement includes dictionary's manage methods
+ * DictionaryManagement use to manage inputting, adding, editing, deleting Dictionary
+ * @author Nguyen Huu Dat
+ * @author Pham Duc Duy
+ * @since 14/9/2018
  */
-class DictionaryManagement
+
+public class DictionaryManagement
 {
     /**
      * insestFromCommandline to get input from commandline
@@ -34,11 +37,15 @@ class DictionaryManagement
         scan.close();
     }
 
+    /**
+     * insertFromFile use to input Dictionary from file
+     * @param inputTxt_Dictionary
+     */
     public void insertFromFile(Dictionary inputTxt_Dictionary)
     {
         try
         {
-            File path = new File("./resource/avdict.txt");
+            File path = new File(".\\src\\data\\avdict.txt");
             FileReader readFile = new FileReader(path);
             BufferedReader bufferReader = new BufferedReader(readFile);
             String line;
@@ -46,7 +53,7 @@ class DictionaryManagement
             {
                 if(line.charAt(0) == '*') continue;
                 Word input_Word = new Word();
-                int index = line.lastIndexOf('\t');
+                int index = line.indexOf('/');
                 if (index == -1) continue;
                 input_Word.setWordTarget(line.substring(0, index));
                 input_Word.setWordExplain(line.substring(index + 1, line.length()));
@@ -61,25 +68,25 @@ class DictionaryManagement
         }
     }
 
-    public void addWords(Dictionary add_Dictionary){
-        Scanner scan = new Scanner(System.in);
-        Word added_Word = new Word();
-        String added_WordTarget = "";
-        String added_WordExplain = "";
-        System.out.print("Enter your target word: ");
-        added_WordTarget = scan.nextLine();
-        System.out.print("Enter your explain word: ");
-        added_WordExplain = scan.nextLine();
-        added_Word.setWordTarget(added_WordTarget);
-        added_Word.setWordExplain(added_WordExplain);
-        add_Dictionary.addElement(added_Word);
-        System.out.println("Added");
-        try{
-            TimeUnit.SECONDS.sleep(2);
+    /**
+     * addWord use to add word into available dictionary
+     * @param add_Dictionary
+     * @param added_Word
+     * @return true/false
+     */
+    public boolean addWords(Dictionary add_Dictionary, Word added_Word)
+    {
+        if (add_Dictionary.addElement(added_Word))
+        {
+            return true;
         }
-        catch (Exception er){};
+        return false;
     }
 
+    /**
+     * editWord use to edit word from available dictionary
+     * @param edit_Dictionary
+     */
     public void editWord(Dictionary edit_Dictionary){
         Scanner scan = new Scanner(System.in);
         Word replace_Word = new Word();
@@ -102,37 +109,44 @@ class DictionaryManagement
                 value.setWordExplain(replace_Word.getWordExplain());
             }
         }
-        System.out.println("Edited");
         try{
             TimeUnit.SECONDS.sleep(2);
         }
         catch (Exception er){};
     }
 
-    public void deleteWord(Dictionary delete_Dictionary){
-        Scanner scan = new Scanner(System.in);
-        String deleted_Word;
-        System.out.println("Enter your word which needs deleting (target word only): ");
-        deleted_Word = scan.nextLine();
+    /**
+     * deleteWord method use to delete word from dictionary
+     * @param delete_Dictionary
+     * @param word_Delete
+     * @return true/false
+     */
+    public boolean deleteWord(Dictionary delete_Dictionary, String word_Delete)
+    {
         for (int i = 0; i < delete_Dictionary.list_word.size(); i++)
         {
             String delete_Target = delete_Dictionary.list_word.get(i).getWordTarget();
-            if (delete_Target.equals(deleted_Word)){
+            if (delete_Target.equals(word_Delete))
+            {
                 delete_Dictionary.list_word.remove(i);
+                return true;
             }
         }
-        System.out.println("Deleted");
+        //System.out.println("Deleted");
         try{
             TimeUnit.SECONDS.sleep(2);
         }
         catch (Exception er){};
+        return false;
     }
+
     /**
-     * updateFile to update fixed data
+     * dictionaryExportToFile method is used to override out file data
+     * @param output_Dictionary
      */
     public void dictionaryExportToFile(Dictionary output_Dictionary){
         try{
-            FileWriter writer = new FileWriter("./resource/Dictionaries.txt");
+            FileWriter writer = new FileWriter(".\\src\\data\\avdict.txt");
             BufferedWriter buffer = new BufferedWriter(writer);
             for (int i = 0; i < output_Dictionary.list_word.size(); i++)
             {
@@ -155,19 +169,24 @@ class DictionaryManagement
         }
     }
 
-    public void dictionaryLookup(Dictionary find_Dictionary)
+    /**
+     * dictionaryLookup method use to search word from dictionary
+     * @param find_Dictionary
+     * @param word_target
+     * @return
+     */
+    public String dictionaryLookup(Dictionary find_Dictionary, String word_target)
     {
-        Scanner scan = new Scanner(System.in);
-        String key_word;
-        System.out.println("Enter your word: ");
-        key_word = scan.nextLine();
-        //scan.close();
+        String result = "";
         for (Word value : find_Dictionary.list_word)
         {
-            if (key_word.equals(value.getWordTarget()))
+            if (value.getWordTarget().equals(word_target))
             {
-                System.out.println(value.getWordExplain());
+                System.out.println("1");
+                result = value.getWordExplain();
+                break;
             }
         }
+        return result;
     }
 }
