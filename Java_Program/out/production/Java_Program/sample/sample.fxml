@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- <?import com.gluonhq.charm.glisten.control.AutoCompleteTextField?> -->
+
+<?import sample.AutoCompleteTextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane alignment="center" hgap="10" prefHeight="659.0" prefWidth="400.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="610.0" prefWidth="400.0">
+         <ImageView fitHeight="708.0" fitWidth="410.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@image/background.jpg" />
+            </image>
+         </ImageView>
+         <Text fill="PINK" layoutX="77.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Advanced English Dictionary" wrappingWidth="266.9040222167969">
+            <font>
+               <Font name="iCielGotham-Ultra" size="18.0" />
+            </font>
+         </Text>
+         <Button alignment="CENTER" contentDisplay="TOP" layoutX="34.0" layoutY="163.0" mnemonicParsing="false" prefHeight="135.0" prefWidth="161.0" style="-fx-background-color: #004e72; -fx-background-radius: 10; -fx-font-size: 18;" text="Favorite Word" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="82.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@image/favoriteButton.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <font>
+               <Font size="18.0" />
+            </font></Button>
+         <Button alignment="CENTER" contentDisplay="TOP" layoutX="210.0" layoutY="163.0" mnemonicParsing="false" prefHeight="135.0" prefWidth="161.0" style="-fx-background-color: #004e72; -fx-background-radius: 10; -fx-font-size: 18;" text="History" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="82.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@image/historyButton.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <font>
+               <Font size="18.0" />
+            </font></Button>
+         <Button id="searchOnline" layoutX="31.0" layoutY="308.0" mnemonicParsing="false" onAction="#changeSceneSearchOnline" prefHeight="78.0" prefWidth="342.0" style="-fx-background-color: #004e72; -fx-background-radius: 10; -fx-font-size: 18;" styleClass="search" text="Search Online" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="62.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@image/googleapiButton.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <font>
+               <Font size="18.0" />
+            </font></Button>
+         <Button contentDisplay="TOP" layoutX="30.0" layoutY="396.0" mnemonicParsing="false" onAction="#changeSceneShowAllWord" prefHeight="187.0" prefWidth="225.0" style="-fx-background-color: #004e72; -fx-background-radius: 10; -fx-font-size: 20;" text="Show All Words" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="120.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@image/allwordsButton.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <font>
+               <Font size="24.0" />
+            </font></Button>
+         <Button fx:id="add_Word" layoutX="264.0" layoutY="396.0" mnemonicParsing="false" onAction="#changeSceneAddWord" prefHeight="55.0" prefWidth="109.0" style="-fx-background-color: #004e72; -fx-background-radius: 10; -fx-font-size: 18;" text="Add" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@image/addButton.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <font>
+               <Font size="18.0" />
+            </font></Button>
+         <Button fx:id="edit_Word" layoutX="264.0" layoutY="461.0" mnemonicParsing="false" onAction="#changeSceneFindEditWord" prefHeight="55.0" prefWidth="109.0" style="-fx-background-color: #004e72; -fx-background-radius: 10; -fx-font-size: 16;" text="Edit" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@image/editButton.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <font>
+               <Font size="18.0" />
+            </font></Button>
+         <Button fx:id="delete_Word" layoutX="264.0" layoutY="528.0" mnemonicParsing="false" onAction="#changeSceneDeleteWord" prefHeight="55.0" prefWidth="109.0" style="-fx-background-color: #004e72; -fx-background-radius: 10; -fx-font-size: 15;" text="Delete" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="45.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@image/deleteButton.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <font>
+               <Font size="14.0" />
+            </font></Button>
+         <Button layoutX="318.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchWord" prefHeight="55.0" prefWidth="54.0" style="-fx-background-color: #004e72; -fx-background-radius: 10;">
+            <graphic>
+               <ImageView fitHeight="37.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@image/searchButton.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+         </Button>
+         <Text fill="WHITE" layoutX="149.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\@ CopyRight">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Text>
+         <AutoCompleteTextField fx:id="input_Search" layoutX="31.0" layoutY="81.0" prefHeight="55.0" prefWidth="280.0" promptText="Seach" style="-fx-background-radius: 10; -fx-background-color: #004e72; -fx-font-size: 24; -fx-text-fill: White;" />
+      </AnchorPane>
+   </children>
+</GridPane>
